@@ -8,18 +8,19 @@ public class Spawner : MonoBehaviour
     public SpawnData[] spawnData;
     float timer;
     int level;
+
     void Awake()
     {
-        //ÀÚ±â ÀÚ½Åµµ Æ÷ÇÔ
+        //ï¿½Ú±ï¿½ ï¿½Ú½Åµï¿½ ï¿½ï¿½ï¿½ï¿½
         spawnPoint = GetComponentsInChildren<Transform>();
     }
     void Update()
     {
-        //ÀÚ±â ÀÚ½ÅÀÇ ¿ìº¯À» ´õÇÔ
+        //ï¿½Ú±ï¿½ ï¿½Ú½ï¿½ï¿½ï¿½ ï¿½ìº¯ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         timer += Time.deltaTime;
-        //½Ã°£¿¡ ¸ÂÃç ·¹º§À» ¿Ã¸²
-        level = Mathf.Min(Mathf.FloorToInt(GameManager.instance.gameTime / 60f),spawnData.Length - 1); //0·¹º§ 
-        if(timer > spawnData[level].spawnTime)
+        //ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã¸ï¿½
+        level = Mathf.Min(Mathf.FloorToInt(GameManager.instance.gameTime / 60f),spawnData.Length - 1); //0ï¿½ï¿½ï¿½ï¿½ 
+        if(timer > spawnData[level].spawnTime && GameManager.instance.gameTime < 300) // ë³´ìŠ¤ ë“±ìž¥ í›„ ëª¬ìŠ¤í„°ê°€ ì•ˆë‚˜ì˜¤ê²Œ ì¡°ê±´ ì¶”ê°€
         {
             Spawn();
             timer = 0f;
@@ -28,7 +29,7 @@ public class Spawner : MonoBehaviour
     void Spawn()
     {
         GameObject enemy = GameManager.instance.pool.Get(0);
-        //ÀÚ±â ÀÚ½ÅÀ» »©±â À§ÇØ 0ºÎÅÍ°¡ ¾Æ´Ñ 1ºÎÅÍ
+        //ï¿½Ú±ï¿½ ï¿½Ú½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 0ï¿½ï¿½ï¿½Í°ï¿½ ï¿½Æ´ï¿½ 1ï¿½ï¿½ï¿½ï¿½
         enemy.transform.position = spawnPoint[Random.Range(1,spawnPoint.Length)].position;
         enemy.GetComponent<Enemy>().Init(spawnData[level]);
     }
@@ -41,5 +42,5 @@ public class SpawnData
     public float spawnTime;
     public int health;
     public float speed;
-    public AudioClip audioClip; // AudioClip ÇÊµå Ãß°¡
+    public AudioClip audioClip; // AudioClip ï¿½Êµï¿½ ï¿½ß°ï¿½
 }

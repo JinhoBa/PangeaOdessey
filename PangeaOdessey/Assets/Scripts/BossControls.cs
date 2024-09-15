@@ -4,8 +4,8 @@ public class BossControls : MonoBehaviour
 {
     public float followDistance = 10f; // 플레이어를 추적할 최대 거리
     public float attackDistance = 3f; // 공격을 시작할 거리
-    public float runSpeed = 2f;
-    public float attackCooldown = 1f; // 공격 간격
+    public float runSpeed = 0.2f;
+    public float attackCooldown = 2f; // 공격 간격
     public LayerMask playerLayer; // 플레이어 레이어 마스크
     public float detectionRadius = 5f; // 탐지 반경
     public float health = 100f; // 보스의 체력
@@ -23,6 +23,7 @@ public class BossControls : MonoBehaviour
     private float lastProjectileSpawnTime;
     private bool facingRight = true;
     private bool isLive = true;
+    private bool doMission = true;
     private Rigidbody2D rigid;
     private Rigidbody2D player;
     private Vector2 lastPlayerPosition;
@@ -79,6 +80,14 @@ public class BossControls : MonoBehaviour
             SpawnProjectile();
             lastProjectileSpawnTime = Time.time;
         }
+
+        // 체력 30% 이하일때 패턴 시작
+        if(health < 100 && doMission){
+
+            BossMission();
+            doMission = false;
+        }
+
     }
     void FlipTowardsPlayer()
     {
@@ -155,6 +164,24 @@ public class BossControls : MonoBehaviour
             GameManager.instance.TakeDamage(collisionDamage);
         }
     }
+
+    // 보스 돌진공격
+    void BossDash()
+    {
+        // 플레이어 위치를 예상하고 돌진
+
+
+    }
+    // 보스 내려찍기 공격
+    void BossDrop()
+    {
+        
+    }
+    void BossMission()
+    {
+        
+    }
+
     // 공격 범위 내 플레이어에게 데미지를 입히는 함수
     public void ApplyAttackDamage()
     {
