@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour
         
         if (bossMode == 1 && gameTime >= bossSpawnTime && !bossSpawned)
         {
-            SpawnBoss();
+            //SpawnBoss();
         }
         
         if (gameTime < maxGameTime)

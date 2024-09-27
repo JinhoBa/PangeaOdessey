@@ -25,7 +25,7 @@ public class BossControls : MonoBehaviour
     private bool isLive = true;
     private bool doMission = true;
     private Rigidbody2D rigid;
-    private Rigidbody2D player;
+    public Rigidbody2D player;
     private Vector2 lastPlayerPosition;
     private Collider2D attackRange; // 공격 범위를 나타내는 Collider
 
